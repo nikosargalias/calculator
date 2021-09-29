@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Operators from "./Operators";
-import { add, subtract, divide, multiply, formatNumber } from "./mathHandlers";
-import { isValidChar, isValidNumber, isValidOperator } from "./validation";
 import {
-  addKeyboardEventListeners,
-  removeKeyboardEventListeners,
-} from "./accessibility";
+  isValidChar,
+  isValidNumber,
+  isValidOperator,
+} from "../functionality/validation";
 
 const appRoot = document.querySelector("#app");
 
@@ -28,11 +27,11 @@ class CalculatorApp extends React.Component {
   }
   componentDidMount() {
     // remove event listener for keyboard when unmount
-    addKeyboardEventListeners(this.handleKeydown.bind(this));
+    window.addEventListener("keydown", this.handleKeydown.bind(this));
   }
   componentWillUnmount() {
     // add event listener for keyboard inputs
-    removeKeyboardEventListeners(this.handleKeydown.bind(this));
+    window.removeEventListener("keydown", this.handleKeydown.bind(this));
   }
 
   resetState() {

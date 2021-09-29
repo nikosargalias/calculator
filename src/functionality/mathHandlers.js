@@ -29,10 +29,4 @@ const formatNumber = (num) => {
     : num.toFixed(3);
 };
 
-const isValidNumber = (num) => {
-  for (let i = 0; i < 10; i++) {
-    if (num == i) return true;
-  }
-};
-
-export { add, subtract, divide, multiply, formatNumber, isValidNumber };
+export { add, subtract, divide, multiply, formatNumber };
