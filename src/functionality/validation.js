@@ -1,4 +1,4 @@
-const operators = new Set(["+", "-", "/", "*", "="]);
+const operators = new Set(["+", "-", "/", "*", "=", "AC", "CE"]);
 const validNumbers = new Set([
   "0",
   "1",

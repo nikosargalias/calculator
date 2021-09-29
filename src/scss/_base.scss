@@ -52,7 +52,7 @@ ul {
 .operators {
   display: grid;
   grid-template-areas:
-    ". . . divide"
+    "ac ce . divide"
     "seven eight nine multiply"
     "four five six subtract"
     "one two three add"
@@ -123,6 +123,12 @@ ul {
     }
     &--equals {
       grid-area: equals;
+    }
+    &--ac {
+      grid-area: ac;
+    }
+    &--ce {
+      grid-area: ce;
     }
   }
 }

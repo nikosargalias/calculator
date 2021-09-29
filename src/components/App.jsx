@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Operators from "./Operators";
+import Button from "./Button";
 import {
   isValidChar,
   isValidNumber,
   isValidOperator,
 } from "../functionality/validation";
+import {
+  processNumberInput,
+  processOperatorInput,
+} from "../functionality/calculator/calculator";
+import CalculatorKeypad from "./CalculatorKeypad";
 
 const appRoot = document.querySelector("#app");
 
@@ -13,18 +19,12 @@ class CalculatorApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      calculation: "",
-      operatorInMemory: "",
-      valueInMemory: "",
       keystrokes: "",
       calculatedValue: "",
-      lastKeyStroke: "",
+      lastKeystroke: "",
     };
   }
 
-  componentDidUpdate() {
-    console.log(this.state);
-  }
   componentDidMount() {
     // remove event listener for keyboard when unmount
     window.addEventListener("keydown", this.handleKeydown.bind(this));
@@ -36,85 +36,46 @@ class CalculatorApp extends React.Component {
 
   resetState() {
     this.setState(() => ({
-      calculation: "",
-      operatorInMemory: "",
-      valueInMemory: "",
       keystrokes: "",
       calculatedValue: "",
-      lastKeyStroke: "",
+      lastOperator: "",
     }));
   }
 
-  handleInput(input) {
-    if (!isValidChar(input)) {
-      // handle error here if input is not part of valid set - this should be considered and error and possiby an attack.
-    }
+  handleOperatorInput(input) {
+    if (!isValidChar(input) || !isValidOperator(input)) return;
 
-    // replace prev operator with new one if recurring
-    // can't start with an operator
-    this.setState(({ keystrokes }) => {
-      if (isValidOperator(input)) {
-        // if equals
-        if (input === "=") {
-          let equation;
-          if (isValidOperator(keystrokes[keystrokes.length - 1])) {
-            equation = keystrokes.slice(0, keystrokes.length - 1);
-          } else {
-            equation = keystrokes;
-          }
-          const result = eval(equation);
-          return {
-            keystrokes: "",
-            calculatedValue: result,
-          };
-        }
-
-        if (keystrokes.endsWith(input)) {
-          return {
-            keystrokes: keystrokes.slice(0, keystrokes.length - 1) + input,
-          };
-        }
-        return {
-          keystrokes: keystrokes + input,
-        };
-      }
-
-      if (isValidNumber(input)) {
-        // Number cannot have 2 decimal places
-        if (input === ".") {
-          const numberSetsSoFar = keystrokes.split(/[\+\-\*\/]/);
-          const lastNumSoFar = numberSetsSoFar[numberSetsSoFar.length - 1];
-          if (lastNumSoFar.includes(".")) {
-            return;
-          }
-        }
-        return {
-          keystrokes: keystrokes + input,
-        };
-      }
+    this.setState(({ keystrokes, calculatedValue, lastKeystroke }) => {
+      const newKeystrokes = processOperatorInput({
+        input,
+        keystrokes,
+        calculatedValue,
+        lastKeystroke,
+      });
+      return newKeystrokes;
     });
-
-    // if equals do calculation even if last keystroke was operator
-
-    // we'll assume the initial value is 0
   }
 
-  handleOperatorInput(operator) {
-    this.handleInput(operator);
-  }
+  handleValueInput(input) {
+    if (!isValidChar(input) || !isValidNumber(input)) return;
 
-  handleValueInput(value) {
-    this.handleInput(value);
+    this.setState(({ keystrokes }) => {
+      const newKeystrokes = processNumberInput({
+        input,
+        keystrokes,
+      });
+      return newKeystrokes;
+    });
   }
 
   handleKeydown(e) {
     const key = e.key;
     if (isValidNumber(key)) {
-      this.handleInput(key);
+      this.handleValueInput(key);
     }
 
     if (isValidOperator(key)) {
-      this.handleInput(key);
+      this.handleOperatorInput(key);
     }
   }
 
@@ -123,36 +84,13 @@ class CalculatorApp extends React.Component {
       <div className="container">
         <div className="calculator">
           <div className="calculator__result">
-            {/* <p>{this.state.calculation || 0}</p> */}
-            {/* <span className="calculator__result--auto">
-              {this.state.calculation}
-            </span> */}
-            <p className="calculator__result--main">
-              {this.state.keystrokes || this.state.calculatedValue || 0}
-            </p>
+            <p>{this.state.keystrokes || this.state.calculatedValue || 0}</p>
           </div>
-          <ul className="calculator__operators operators">
-            <Operators
-              type="operations"
-              handleInput={this.handleInput.bind(this)}
-            />
-            <Operators
-              type="values"
-              handleInput={this.handleInput.bind(this)}
-            />
-            <button
-              className="operators__btn"
-              onClick={this.resetState.bind(this)}
-            >
-              AC
-            </button>
-            <button
-              className="operators__btn"
-              onClick={this.resetState.bind(this)}
-            >
-              CE
-            </button>
-          </ul>
+
+          <CalculatorKeypad
+            handleValueInput={this.handleValueInput.bind(this)}
+            handleOperatorInput={this.handleOperatorInput.bind(this)}
+          />
         </div>
       </div>
     );
