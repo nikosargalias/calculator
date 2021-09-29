@@ -8,6 +8,25 @@ import {
   removeKeyboardEventListeners,
 } from "./accessibility";
 
+const validChars = new Set([
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  ".",
+  "+",
+  "-",
+  "/",
+  "*",
+  "=",
+]);
+
 const appRoot = document.querySelector("#app");
 
 class CalculatorApp extends React.Component {
@@ -23,38 +42,16 @@ class CalculatorApp extends React.Component {
     };
   }
 
-  componentWillUnmount() {
-    // add event listener for keyboard inputs
-    removeKeyboardEventListeners(this.handleKeydown.bind(this));
+  componentDidUpdate() {
+    console.log(this.state);
   }
   componentDidMount() {
     // remove event listener for keyboard when unmount
     addKeyboardEventListeners(this.handleKeydown.bind(this));
   }
-
-  componentDidUpdate() {
-    console.log(this.state);
-  }
-
-  calculateEquation(prevValue, valueInMemory, operator) {
-    let newValue;
-
-    switch (operator) {
-      case "/":
-        newValue = divide(prevValue, valueInMemory);
-        break;
-      case "+":
-        newValue = add(prevValue, valueInMemory);
-        break;
-      case "-":
-        newValue = subtract(prevValue, valueInMemory);
-        break;
-      case "*":
-        newValue = multiply(prevValue, valueInMemory);
-        break;
-    }
-
-    return formatNumber(newValue);
+  componentWillUnmount() {
+    // add event listener for keyboard inputs
+    removeKeyboardEventListeners(this.handleKeydown.bind(this));
   }
 
   resetState() {
@@ -68,144 +65,72 @@ class CalculatorApp extends React.Component {
     }));
   }
 
-  appendToInitialValue(value) {
-    this.setState(({ keystrokes, calculation, calculatedValue }) => {
-      return {
-        calculation: calculation + value,
-        keystrokes: keystrokes + value,
-        lastKeyStroke: value,
-        calculatedValue: calculatedValue + value,
-      };
-    });
-  }
+  // 1. input keystroke
+  // pass keystroke to function
+  // validation for keystroke
+  // append keystroke to keystrokes
+  // change in end to handleInput
 
-  setInitialValue(value) {
-    this.setState(() => {
-      return {
-        calculation: value,
-        operatorInMemory: "",
-        keystrokes: value,
-        lastKeyStroke: value,
-        calculatedValue: value,
-      };
-    });
-  }
+  handleInput(input) {
+    if (!validChars.has(input)) {
+      // handle error here if input is not part of valid set - this should be considered and error and possiby an attack.
+    }
 
-  setCalculation() {
-    this.setState(
-      ({ calculation, valueInMemory, operatorInMemory, keystrokes }) => {
-        const newValue = this.calculateEquation(
-          calculation,
-          valueInMemory,
-          operatorInMemory
-        );
+    // replace prev operator with new one if recurring
+    // can't start with an operator
+    this.setState(({ keystrokes }) => {
+      if (isValidOperator(input)) {
+        // if equals
+        if (input === "=") {
+          let equation;
+          if (isValidOperator(keystrokes[keystrokes.length - 1])) {
+            equation = keystrokes.slice(0, keystrokes.length - 1);
+          } else {
+            equation = keystrokes;
+          }
+          const result = eval(equation);
+          return {
+            keystrokes: "",
+            calculatedValue: result,
+          };
+        }
 
+        if (keystrokes.endsWith(input)) {
+          return {
+            keystrokes: keystrokes.slice(0, keystrokes.length - 1) + input,
+          };
+        }
         return {
-          calculation: newValue,
+          keystrokes: keystrokes + input,
         };
       }
-    );
-  }
 
-  setOperator(operator) {
-    this.setState(({ keystrokes, lastKeyStroke }) => {
-      return {
-        operatorInMemory: operator,
-        lastKeyStroke: operator,
-        keystrokes: isValidNumber(lastKeyStroke)
-          ? keystrokes + operator
-          : keystrokes.slice(0, -1) + operator,
-        // replaces last value of keystrokes if last and new are both operators
-      };
+      if (isValidNumber(input)) {
+        // Number cannot have 2 decimal places
+        if (input === ".") {
+          const numberSetsSoFar = keystrokes.split(/[\+\-\*\/]/);
+          const lastNumSoFar = numberSetsSoFar[numberSetsSoFar.length - 1];
+          if (lastNumSoFar.includes(".")) {
+            return;
+          }
+        }
+        return {
+          keystrokes: keystrokes + input,
+        };
+      }
     });
-  }
 
-  setValueInMemory(value) {
-    this.setState(({ keystrokes, valueInMemory }) => {
-      return {
-        valueInMemory: valueInMemory + value,
-        keystrokes: keystrokes + value,
-        lastKeyStroke: value,
-      };
-    });
-  }
+    // if equals do calculation even if last keystroke was operator
 
-  setTempCalculation() {
-    this.setState(({ valueInMemory, operatorInMemory, calculation } = {}) => {
-      let newValue = this.calculateEquation(
-        calculation,
-        valueInMemory,
-        operatorInMemory
-      );
-
-      return {
-        calculatedValue: newValue ?? valueInMemory,
-      };
-    });
-  }
-
-  setStateAfterCalculation(operator) {
-    this.setState(({ keystrokes }) => {
-      return {
-        operatorInMemory: operator,
-        valueInMemory: "",
-        keystrokes: operator === "=" ? "" : keystrokes + operator,
-        lastKeyStroke: operator,
-      };
-    });
+    // we'll assume the initial value is 0
   }
 
   handleOperatorInput(operator) {
-    // If operator is first keystroke do nothing
-    if (
-      operator &&
-      !this.state.calculatedValue &&
-      this.state.calculatedValue !== 0
-    )
-      return;
-
-    // if operator followed by number followed by another operator
-    if (operator && this.state.operatorInMemory && this.state.valueInMemory) {
-      this.setCalculation();
-      this.setStateAfterCalculation(operator);
-      return;
-    }
-
-    // sets operator if calculation doesn't get made
-    if (operator) {
-      this.setOperator(operator);
-      return;
-    }
+    this.handleInput(operator);
   }
 
   handleValueInput(value) {
-    const isValidValue = !isNaN(value) || value === ".";
-
-    // If number pressed directly after pressing =
-    if (isValidValue && this.state.operatorInMemory === "=") {
-      this.setInitialValue(value);
-      return;
-    }
-
-    // number pressed first time without having pressed anything else or number pressed again without any operators in queue.
-    if (
-      (isValidValue &&
-        !this.state.operatorInMemory &&
-        !this.state.valueInMemory) ||
-      (isValidValue &&
-        !this.state.calculation &&
-        this.state.calculatedValue !== 0)
-    ) {
-      this.appendToInitialValue(value);
-      return;
-    }
-
-    // sets valueInMemory if calculation doesn't get made
-    if (value) {
-      this.setValueInMemory(value);
-      this.setTempCalculation(value);
-      return;
-    }
+    this.handleInput(value);
   }
 
   handleKeydown(e) {
@@ -224,22 +149,22 @@ class CalculatorApp extends React.Component {
       <div className="container">
         <div className="calculator">
           <div className="calculator__result">
-            <p>{this.state.calculatedValue || 0}</p>
+            {/* <p>{this.state.calculation || 0}</p> */}
             {/* <span className="calculator__result--auto">
               {this.state.calculation}
             </span> */}
             <p className="calculator__result--main">
-              {this.state.keystrokes || 0}
+              {this.state.keystrokes || this.state.calculatedValue || 0}
             </p>
           </div>
           <ul className="calculator__operators operators">
             <Operators
               type="operations"
-              handleOperatorInput={this.handleOperatorInput.bind(this)}
+              handleInput={this.handleInput.bind(this)}
             />
             <Operators
               type="values"
-              handleValueInput={this.handleValueInput.bind(this)}
+              handleInput={this.handleInput.bind(this)}
             />
             <button
               className="operators__btn"

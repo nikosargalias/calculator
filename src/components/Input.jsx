@@ -1,16 +1,10 @@
 import React from "react";
 
-const Input = ({
-  value,
-  operator,
-  handleOperatorInput,
-  handleValueInput,
-  className,
-  entity,
-} = {}) => {
+const Input = ({ value, operator, handleInput, className, entity } = {}) => {
   function handleOnClick() {
-    value && handleValueInput(value);
-    operator && handleOperatorInput(operator);
+    handleInput(value);
+    // value && handleValueInput(value);
+    // operator && handleOperatorInput(operator);
   }
 
   return (
