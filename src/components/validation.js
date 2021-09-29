@@ -1,11 +1,22 @@
-const isValidNumber = (num) => {
-  const validNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
-  return validNumbers.includes(num) ? true : false;
-};
+const operators = new Set(["+", "-", "/", "*", "="]);
+const validNumbers = new Set([
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  ".",
+]);
 
-const isValidOperator = (operator) => {
-  const operators = ["+", "-", "/", "*", "="];
-  return operators.includes(operator) ? true : false;
-};
+const isValidChar = (char) => operators.has(char) || validNumbers.has(char);
 
-export { isValidNumber, isValidOperator };
+const isValidNumber = (num) => validNumbers.has(num);
+
+const isValidOperator = (operator) => operators.has(operator);
+
+export { isValidChar, isValidNumber, isValidOperator };

@@ -2,30 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Operators from "./Operators";
 import { add, subtract, divide, multiply, formatNumber } from "./mathHandlers";
-import { isValidNumber, isValidOperator } from "./validation";
+import { isValidChar, isValidNumber, isValidOperator } from "./validation";
 import {
   addKeyboardEventListeners,
   removeKeyboardEventListeners,
 } from "./accessibility";
-
-const validChars = new Set([
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  ".",
-  "+",
-  "-",
-  "/",
-  "*",
-  "=",
-]);
 
 const appRoot = document.querySelector("#app");
 
@@ -65,14 +46,8 @@ class CalculatorApp extends React.Component {
     }));
   }
 
-  // 1. input keystroke
-  // pass keystroke to function
-  // validation for keystroke
-  // append keystroke to keystrokes
-  // change in end to handleInput
-
   handleInput(input) {
-    if (!validChars.has(input)) {
+    if (!isValidChar(input)) {
       // handle error here if input is not part of valid set - this should be considered and error and possiby an attack.
     }
 
@@ -136,11 +111,11 @@ class CalculatorApp extends React.Component {
   handleKeydown(e) {
     const key = e.key;
     if (isValidNumber(key)) {
-      this.handleValueInput(key);
+      this.handleInput(key);
     }
 
     if (isValidOperator(key)) {
-      this.handleOperatorInput(key);
+      this.handleInput(key);
     }
   }
 
