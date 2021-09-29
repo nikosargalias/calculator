@@ -1,0 +1,128 @@
+html *,
+html *::before,
+html *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 1rem;
+  // background-color: $col-prim-lighter;
+  // color: $secon-font;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+}
+
+.is-active {
+  font-weight: 700;
+}
+
+p {
+  transition: all 1s;
+}
+
+.edit {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.fade {
+  opacity: 1;
+}
+
+ul {
+  list-style: none;
+}
+
+.calculator {
+  border: solid 1px black;
+  border-radius: 5px;
+  max-width: 90vw;
+  width: 200px;
+
+  &__result {
+    padding: 0.5rem 1rem;
+    text-align: end;
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.486);
+  }
+}
+
+.operators {
+  display: grid;
+  grid-template-areas:
+    ". . . divide"
+    "seven eight nine multiply"
+    "four five six subtract"
+    "one two three add"
+    "zero . period equals";
+
+  &__btn {
+    display: inline-block;
+    padding: 0.5rem;
+    width: 100%;
+    background: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+      transform: scale(1.1);
+    }
+  }
+
+  &__value {
+    &--0 {
+      grid-area: zero;
+    }
+    &--1 {
+      grid-area: one;
+    }
+    &--2 {
+      grid-area: two;
+    }
+    &--3 {
+      grid-area: three;
+    }
+    &--4 {
+      grid-area: four;
+    }
+    &--5 {
+      grid-area: five;
+    }
+    &--6 {
+      grid-area: six;
+    }
+    &--7 {
+      grid-area: seven;
+    }
+    &--8 {
+      grid-area: eight;
+    }
+    &--9 {
+      grid-area: nine;
+    }
+    &--period {
+      grid-area: period;
+    }
+  }
+
+  &__operator {
+    &--add {
+      grid-area: add;
+    }
+    &--subtract {
+      grid-area: subtract;
+    }
+    &--divide {
+      grid-area: divide;
+    }
+    &--multiply {
+      grid-area: multiply;
+    }
+    &--equals {
+      grid-area: equals;
+    }
+  }
+}
