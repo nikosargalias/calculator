@@ -1,7 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Operators from "./Operators";
-import Button from "./Button";
 import {
   isValidChar,
   isValidNumber,

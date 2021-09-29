@@ -1,21 +1,21 @@
 import React from "react";
+
 import Input from "./Input";
-import Button from "./Button";
 
 const CalculatorKeypad = ({ handleValueInput, handleOperatorInput }) => {
   return (
     <ul className="calculator__operators operators">
-      <Button
+      <Input
         value="AC"
         handleInput={handleOperatorInput}
         className="operators__operator--ac"
       />
-      <Button
+      <Input
         value="CE"
         handleInput={handleOperatorInput}
         className="operators__operator--ce"
       />
-      <Button
+      <Input
         value="/"
         entity="÷"
         handleInput={handleOperatorInput}
@@ -23,22 +23,22 @@ const CalculatorKeypad = ({ handleValueInput, handleOperatorInput }) => {
       />
 
       {/* row 2 */}
-      <Button
+      <Input
         value="7"
         handleInput={handleValueInput}
         className="operators__value--7"
       />
-      <Button
+      <Input
         value="8"
         handleInput={handleValueInput}
         className="operators__value--8"
       />
-      <Button
+      <Input
         value="9"
         handleInput={handleValueInput}
         className="operators__value--9"
       />
-      <Button
+      <Input
         value="*"
         entity="×"
         handleInput={handleOperatorInput}
@@ -46,22 +46,22 @@ const CalculatorKeypad = ({ handleValueInput, handleOperatorInput }) => {
       />
 
       {/* row 3 */}
-      <Button
+      <Input
         value="4"
         handleInput={handleValueInput}
         className="operators__value--4"
       />
-      <Button
+      <Input
         value="5"
         handleInput={handleValueInput}
         className="operators__value--5"
       />
-      <Button
+      <Input
         value="6"
         handleInput={handleValueInput}
         className="operators__value--6"
       />
-      <Button
+      <Input
         value="-"
         entity="−"
         handleInput={handleOperatorInput}
@@ -69,22 +69,22 @@ const CalculatorKeypad = ({ handleValueInput, handleOperatorInput }) => {
       />
 
       {/* row 4 */}
-      <Button
+      <Input
         value="1"
         handleInput={handleValueInput}
         className="operators__value--1"
       />
-      <Button
+      <Input
         value="2"
         handleInput={handleValueInput}
         className="operators__value--2"
       />
-      <Button
+      <Input
         value="3"
         handleInput={handleValueInput}
         className="operators__value--3"
       />
-      <Button
+      <Input
         value="+"
         entity="+"
         handleInput={handleOperatorInput}
@@ -92,19 +92,19 @@ const CalculatorKeypad = ({ handleValueInput, handleOperatorInput }) => {
       />
 
       {/* row 5 */}
-      <Button
+      <Input
         value="0"
         handleInput={handleValueInput}
         className="operators__value--0"
       />
 
-      <Button
+      <Input
         value="."
         handleInput={handleValueInput}
         className="operators__value--period"
       />
 
-      <Button
+      <Input
         value="="
         entity="="
         handleInput={handleOperatorInput}
