@@ -6,7 +6,7 @@ A quick note before reading on: I'mn afraid due to some restrictions on my lapto
 
 Please see below for an outline of each technology used in this project, and the reasoning behind each choice.
 
-## React Architecture - mixed with MVC
+### React Architecture - mixed with MVC
 
 - I chose to use React because I felt this project benefitted from the single flow of state, and component architecture. It made the creation of the different components simple with a clear seperation of view controller and logic.
 
@@ -37,13 +37,19 @@ I'm using NPM, Webpack and Babel for multiple reasons listed below:
 - To transpile modern Javascript features via babel in order for the finished bundle to be compatible with older browsers.
 - To minify all html, js and css files, as well as split bundles into multiple smaller files for performance benefits.
 
-## Technologies I chose to ommit
+### Accessibility
 
-- Redux
-- I chose to ommit Redux because this project was a small single page project and I didn't feel it would benefit from more complex state management than what React already provides.
+- Aria Attributes
+  Regarding accessibility, there is little to no information online about specifically making a calculator accessible. I did consider multiple options, from wrapping the numpad buttons in a list. however I decided to go with a div with a role="group", in addition to an aria-label="calculator numpad" and a aria-describedby attribute on the child buttons linked to the parent div. In addition, for the buttons which contain symbols as textContent. I used an aria label to explicitely state the correct word, rather than relying on the screen readder to read the symbol correctly.
 
-- React Router
-- I chose to ommit React Router because this is a simngle page application.
+- Tab Order
+  In addition to the above, I ensure correct tab order by correct html placement of each button based on the calculator design that was provided.
+
+- Keyboard Accessibility
+  I added an event listener to the window, listening to keyboard pressed, and had some validation which checked the key that was pressed. if the key was a valid input, the handler functions were called correctly.
+
+- role="live"
+  I used the semantically correct <output> element for the calculator result panel so as to automatically read the inputs/result.
 
 ### HTML & CSS/SCSS
 
@@ -70,3 +76,11 @@ In addition to the BEM methodology, I utilised a component based file structure 
 
 - I utilised SCSS because it adds many useful features that wouldn't be possible with vanilla CSS. For example, the use of mixins for media queries in combination with a map for the viewport breakpoints makes it easy to globally change the breakpoint values if ever required and make sure all your media queries use the same breakpoint values.
 - The nesting structure perhaps makes it slightly nicer to read and udnerstand what elements are block versus children versus modifiers.
+
+### Technologies I chose to ommit
+
+- Redux
+- I chose to ommit Redux because this project was a small single page project and I didn't feel it would benefit from more complex state management than what React already provides.
+
+- React Router
+- I chose to ommit React Router because this is a simngle page application.
