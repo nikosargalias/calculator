@@ -4,11 +4,11 @@ import {
   isValidChar,
   isValidNumber,
   isValidOperator,
-} from "../logic/validation";
+} from "../logic/validation/validation";
 import {
   processNumberInput,
   processOperatorInput,
-} from "../logic/calculator-logic";
+} from "../logic/calculator-logic/calculator-logic";
 import Numpad from "./Numpad";
 
 const appRoot = document.querySelector("#app");
@@ -32,17 +32,9 @@ class CalculatorApp extends React.Component {
     window.removeEventListener("keydown", this.handleKeydown.bind(this));
   }
 
-  resetState() {
-    this.setState(() => ({
-      keystrokes: "",
-      calculatedValue: "",
-      lastOperator: "",
-    }));
-  }
-
   handleOperatorInput(input) {
     if (!isValidChar(input) || !isValidOperator(input)) {
-      // do something
+      // do some eroor handling
       return;
     }
 
@@ -59,7 +51,7 @@ class CalculatorApp extends React.Component {
 
   handleValueInput(input) {
     if (!isValidChar(input) || !isValidNumber(input)) {
-      // do something
+      // do some eroor handling
       return;
     }
 
@@ -74,6 +66,12 @@ class CalculatorApp extends React.Component {
 
   handleKeydown(e) {
     const key = e.key;
+
+    // if escape is pressed, reset calculator
+    if (key === "Escape") {
+      this.handleOperatorInput("AC");
+    }
+
     if (isValidNumber(key)) {
       this.handleValueInput(key);
     }
