@@ -28,6 +28,9 @@ function processOperatorInput({
   }
 
   if (input === "CE") {
+    // normal implementation would be the following (please note, I haven't implemented completely due to time constraints)
+    // if last keystroke is a number
+    // remove last entry
     return {
       keystrokes: "",
       lastKeystroke: "CE",
