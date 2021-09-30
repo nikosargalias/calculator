@@ -1,5 +1,15 @@
 import { isValidChar, isValidNumber, isValidOperator } from "../validation";
 
+const formatNumber = (num) => {
+  const numOfDecimalsPlaces = num.toString().split(".")[1]?.length;
+
+  return Number.isInteger(num)
+    ? num.toFixed(0)
+    : numOfDecimalsPlaces < 2
+    ? num.toFixed(1)
+    : num.toFixed(3);
+};
+
 function processOperatorInput({
   input,
   keystrokes,
@@ -32,7 +42,7 @@ function processOperatorInput({
       } else {
         equation = keystrokes;
       }
-      const result = eval(equation);
+      const result = formatNumber(eval(equation));
       return {
         keystrokes: "",
         calculatedValue: result,

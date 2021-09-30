@@ -9,7 +9,7 @@ import {
   processNumberInput,
   processOperatorInput,
 } from "../functionality/calculator/calculator";
-import CalculatorKeypad from "./CalculatorKeypad";
+import CalculatorNumpad from "./CalculatorNumpad";
 
 const appRoot = document.querySelector("#app");
 
@@ -82,10 +82,12 @@ class CalculatorApp extends React.Component {
       <div className="container">
         <div className="calculator">
           <div className="calculator__result">
-            <p>{this.state.keystrokes || this.state.calculatedValue || 0}</p>
+            <output>
+              {this.state.keystrokes || this.state.calculatedValue || 0}
+            </output>
           </div>
 
-          <CalculatorKeypad
+          <CalculatorNumpad
             handleValueInput={this.handleValueInput.bind(this)}
             handleOperatorInput={this.handleOperatorInput.bind(this)}
           />
