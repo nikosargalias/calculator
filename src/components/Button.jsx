@@ -16,7 +16,7 @@ const Buttom = ({
     <button
       aria-describedby={ariaDescribedBy}
       aria-label={ariaLabel || ""}
-      className={`numpad__btn ${className}`}
+      className={`${className}`}
       onClick={handleOnClick}
     >
       {entity || value}
