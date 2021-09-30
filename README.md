@@ -10,7 +10,7 @@ Please see below for an outline of each technology used in this project, and the
 
 ### React Architecture
 
-- I chose to use React because I felt this project benefitted from the single flow of state, and component architecture.
+I chose to use React because I felt this project benefitted from the single flow of state, and component architecture.
 
 The parent <CalculatorApp /> component is what holds the state of the calculator. However the functionality has been extracted to a separate file titled calculator-logic.js inside the /logic folder - the purpose of this is twofold:
 
@@ -76,7 +76,7 @@ In addition to the BEM methodology, I utilised a component based file structure 
 - I utilised SCSS because it adds many useful features that wouldn't be possible with vanilla CSS. For example, the use of mixins for media queries in combination with a map for the viewport breakpoints makes it easy to globally change the breakpoint values if ever required and make sure all your media queries use the same breakpoint values.
 - The nesting structure perhaps makes it slightly nicer to read and udnerstand what elements are block versus children versus modifiers.
 
-### Technologies I chose to ommit
+### Technologies I chose to omit
 
 - Redux
 - I chose to omit Redux because this project was a small single page project and I didn't feel it would benefit from more complex state management than what React already provides.
