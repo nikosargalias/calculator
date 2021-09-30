@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "./Button";
 
-const CalculatorNumpad = ({ handleValueInput, handleOperatorInput }) => {
+const Numpad = ({ handleValueInput, handleOperatorInput }) => {
   return (
     <div
       role="group"
@@ -144,4 +144,4 @@ const CalculatorNumpad = ({ handleValueInput, handleOperatorInput }) => {
   );
 };
 
-export default CalculatorNumpad;
+export default Numpad;

@@ -1,13 +1,14 @@
-import { isValidChar, isValidNumber, isValidOperator } from "../validation";
+import { isValidNumber, isValidOperator } from "../validation";
 
 const formatNumber = (num) => {
   const numOfDecimalsPlaces = num.toString().split(".")[1]?.length;
 
+  // NOTE: num.toFixed returns a string (this is unexpected behaviour as it is a method called on a number, so I am reconverting to number to return the same type as passed in)
   return Number.isInteger(num)
-    ? num.toFixed(0)
+    ? Number(num.toFixed(0))
     : numOfDecimalsPlaces < 2
-    ? num.toFixed(1)
-    : num.toFixed(3);
+    ? Number(num.toFixed(1))
+    : Number(num.toFixed(3));
 };
 
 function processOperatorInput({
@@ -82,6 +83,7 @@ function processNumberInput({ input, keystrokes }) {
     const numberSetsSoFar = keystrokes.split(/[\+\-\*\/]/);
     return numberSetsSoFar[numberSetsSoFar.length - 1];
   };
+
   // Number cannot have 2 decimal places
   if (input === ".") {
     const lastNumSoFar = getLastNumberFromKeystrokes(keystrokes);

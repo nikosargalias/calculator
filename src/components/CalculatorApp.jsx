@@ -9,7 +9,7 @@ import {
   processNumberInput,
   processOperatorInput,
 } from "../functionality/calculator/calculator";
-import CalculatorNumpad from "./CalculatorNumpad";
+import Numpad from "./Numpad";
 
 const appRoot = document.querySelector("#app");
 
@@ -87,7 +87,7 @@ class CalculatorApp extends React.Component {
             </output>
           </div>
 
-          <CalculatorNumpad
+          <Numpad
             handleValueInput={this.handleValueInput.bind(this)}
             handleOperatorInput={this.handleOperatorInput.bind(this)}
           />
