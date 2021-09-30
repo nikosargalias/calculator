@@ -1,0 +1,5 @@
+@mixin media($viewport) {
+  @media (min-width: map-get($breakpoints, $viewport)) {
+    @content;
+  }
+}

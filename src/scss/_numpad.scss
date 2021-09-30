@@ -1,0 +1,108 @@
+.numpad {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-template-areas:
+    "ac ce . divide"
+    "seven eight nine multiply"
+    "four five six subtract"
+    "one two three add"
+    "zero . period equals";
+
+  min-height: 35rem;
+
+  &__btn {
+    font-size: 3rem;
+    font-weight: 500;
+    display: inline-block;
+    padding: 0.7rem 0;
+    background: transparent;
+    border: none;
+    color: $numpad-color;
+
+    &--light {
+      color: $numpad-color-light;
+    }
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+      transform: scale(1.1);
+      background-color: $hover-color;
+    }
+
+    &:focus {
+      background-color: $hover-color;
+      outline: none;
+      border-radius: 5px;
+    }
+
+    &--accent {
+      color: $operator-color;
+    }
+
+    &--accent-2 {
+      color: $equals-color;
+    }
+  }
+
+  &__value {
+    &--0 {
+      grid-area: zero;
+    }
+    &--1 {
+      grid-area: one;
+    }
+    &--2 {
+      grid-area: two;
+    }
+    &--3 {
+      grid-area: three;
+    }
+    &--4 {
+      grid-area: four;
+    }
+    &--5 {
+      grid-area: five;
+    }
+    &--6 {
+      grid-area: six;
+    }
+    &--7 {
+      grid-area: seven;
+    }
+    &--8 {
+      grid-area: eight;
+    }
+    &--9 {
+      grid-area: nine;
+    }
+    &--period {
+      grid-area: period;
+    }
+  }
+
+  &__operator {
+    &--add {
+      grid-area: add;
+    }
+    &--subtract {
+      grid-area: subtract;
+    }
+    &--divide {
+      grid-area: divide;
+    }
+    &--multiply {
+      grid-area: multiply;
+    }
+    &--equals {
+      grid-area: equals;
+    }
+    &--ac {
+      grid-area: ac;
+    }
+    &--ce {
+      grid-area: ce;
+    }
+  }
+}

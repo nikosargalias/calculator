@@ -1,0 +1,14 @@
+.calculator {
+  border: solid 1px $border-color;
+  border-radius: 5px;
+  width: 30rem;
+  max-width: 90vw;
+  // height: 47.2rem;
+  box-shadow: 0 3px 10px 0px $border-color;
+  background-color: #ffffff;
+  overflow: hidden;
+
+  &__numpad {
+    padding: 2rem 2rem 3rem;
+  }
+}

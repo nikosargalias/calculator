@@ -6,147 +6,49 @@ html *::after {
   padding: 0;
 }
 
+html {
+  font-size: 50%;
+
+  // As I'm using Rems for all size values, when reducing/increasing the root html font size, it changes the size of the calculator proportionally
+  @include media("mobile") {
+    font-size: 62.5%;
+  }
+}
+
 body {
   padding: 1rem;
-  // background-color: $col-prim-lighter;
-  // color: $secon-font;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.4rem;
+  font-family: $font-stack;
+  background-color: $bg-color;
+  color: $numpad-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-button {
-}
-
-.is-active {
-  font-weight: 700;
-}
-
-p {
-  transition: all 1s;
-}
-
-.edit {
-  opacity: 0;
-  transition: opacity 1s;
-}
-
-.fade {
-  opacity: 1;
-}
-
+// overwriting list default
 ul {
   list-style: none;
 }
 
-.calculator {
-  border: solid 1px black;
-  border-radius: 5px;
-  max-width: 90vw;
-  width: 220px;
-  padding: 1.5rem 0;
+// overwriting button defaults
+.button {
+  border: none;
+  width: auto;
+  overflow: visible;
 
-  &__result {
-    padding: 0.5rem 1rem;
-    text-align: end;
-    background: white;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.486);
-  }
-}
+  background: transparent;
 
-.numpad {
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-auto-rows: 1fr;
-  grid-template-areas:
-    "ac ce . divide"
-    "seven eight nine multiply"
-    "four five six subtract"
-    "one two three add"
-    "zero . period equals";
-  padding: 0 0.5rem;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
 
-  // justify-content: center;
-  // align-items: center;
-  // justify-items: center;
-  &__btn {
-    font-size: inherit;
-    display: inline-block;
-    padding: 0.7rem 0;
-    // width: 100%;
-    background: transparent;
-    border: none;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
 
-    &:hover {
-      cursor: pointer;
-      opacity: 0.8;
-      transform: scale(1.1);
-      background-color: rgba(236, 236, 236, 0.835);
-    }
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
 
-    &:focus {
-      background-color: rgba(236, 236, 236, 0.835);
-      outline: none;
-      border-radius: 5px;
-    }
-  }
-
-  &__value {
-    &--0 {
-      grid-area: zero;
-    }
-    &--1 {
-      grid-area: one;
-    }
-    &--2 {
-      grid-area: two;
-    }
-    &--3 {
-      grid-area: three;
-    }
-    &--4 {
-      grid-area: four;
-    }
-    &--5 {
-      grid-area: five;
-    }
-    &--6 {
-      grid-area: six;
-    }
-    &--7 {
-      grid-area: seven;
-    }
-    &--8 {
-      grid-area: eight;
-    }
-    &--9 {
-      grid-area: nine;
-    }
-    &--period {
-      grid-area: period;
-    }
-  }
-
-  &__operator {
-    &--add {
-      grid-area: add;
-    }
-    &--subtract {
-      grid-area: subtract;
-    }
-    &--divide {
-      grid-area: divide;
-    }
-    &--multiply {
-      grid-area: multiply;
-    }
-    &--equals {
-      grid-area: equals;
-    }
-    &--ac {
-      grid-area: ac;
-    }
-    &--ce {
-      grid-area: ce;
-    }
-  }
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
 }
