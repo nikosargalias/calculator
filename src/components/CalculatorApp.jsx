@@ -86,7 +86,7 @@ class CalculatorApp extends React.Component {
       <div className="container">
         <div className="calculator">
           <div className="calculator__result result">
-            <output>
+            <output aria-label="calculator output">
               {this.state.keystrokes || this.state.calculatedValue || 0}
             </output>
           </div>
