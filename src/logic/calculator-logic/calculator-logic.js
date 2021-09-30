@@ -27,6 +27,13 @@ function processOperatorInput({
     return;
   }
 
+  if (input === "CE") {
+    return {
+      keystrokes: "",
+      lastKeystroke: "CE",
+    };
+  }
+
   if (input === "AC") {
     return {
       keystrokes: "",
