@@ -11,7 +11,10 @@ body {
   // background-color: $col-prim-lighter;
   // color: $secon-font;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+}
+
+button {
 }
 
 .is-active {
@@ -39,7 +42,8 @@ ul {
   border: solid 1px black;
   border-radius: 5px;
   max-width: 90vw;
-  width: 200px;
+  width: 220px;
+  padding: 1.5rem 0;
 
   &__result {
     padding: 0.5rem 1rem;
@@ -51,17 +55,24 @@ ul {
 
 .numpad {
   display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
   grid-template-areas:
     "ac ce . divide"
     "seven eight nine multiply"
     "four five six subtract"
     "one two three add"
     "zero . period equals";
+  padding: 0 0.5rem;
 
+  // justify-content: center;
+  // align-items: center;
+  // justify-items: center;
   &__btn {
+    font-size: inherit;
     display: inline-block;
-    padding: 0.5rem;
-    width: 100%;
+    padding: 0.7rem 0;
+    // width: 100%;
     background: transparent;
     border: none;
 
@@ -69,6 +80,13 @@ ul {
       cursor: pointer;
       opacity: 0.8;
       transform: scale(1.1);
+      background-color: rgba(236, 236, 236, 0.835);
+    }
+
+    &:focus {
+      background-color: rgba(236, 236, 236, 0.835);
+      outline: none;
+      border-radius: 5px;
     }
   }
 
