@@ -11,14 +11,14 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
       id="calculator__numpad"
     >
       <Button
-        ariaLabel="reset"
+        ariaLabel="reset calculator"
         ariaDescribedBy="calculator__numpad"
         value="AC"
         handleInput={handleOperatorInput}
         className="numpad__btn numpad__operator--ac numpad__btn--light"
       />
       <Button
-        ariaLabel=""
+        ariaLabel="clear entry"
         value="CE"
         handleInput={handleOperatorInput}
         className="numpad__btn numpad__operator--ce  numpad__btn--light"
