@@ -1,4 +1,4 @@
-import { isValidNumber, isValidOperator } from "./validation";
+import { isValidNumber, isValidOperator } from "../validation/validation";
 
 const formatNumber = (num) => {
   const numOfDecimalsPlaces = num.toString().split(".")[1]?.length;

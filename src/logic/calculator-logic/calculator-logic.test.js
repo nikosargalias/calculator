@@ -1,4 +1,4 @@
-import { processNumberInput, processOperatorInput } from "../calculator";
+import { processNumberInput, processOperatorInput } from "./calculator";
 
 // operator tests
 test("2+2 should return calculated state when pressing equals (=)", () => {
