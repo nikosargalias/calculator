@@ -15,21 +15,21 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         ariaDescribedBy="calculator__numpad"
         value="AC"
         handleInput={handleOperatorInput}
-        className="numpad__operator--ac"
+        className="numpad__btn numpad__operator--ac numpad__btn--light"
       />
       <Button
         ariaLabel=""
         value="CE"
         handleInput={handleOperatorInput}
-        className="numpad__operator--ce"
+        className="numpad__btn numpad__operator--ce  numpad__btn--light"
       />
       <Button
         ariaLabel="division"
-        ariaDescribedBy="calculator__numpad"
+        ariaDescribedBy="calculator__numpad "
         value="/"
         entity="÷"
         handleInput={handleOperatorInput}
-        className="numpad__operator--divide"
+        className="numpad__btn numpad__operator--divide numpad__btn--accent"
       />
 
       {/* row 2 */}
@@ -37,19 +37,19 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         ariaDescribedBy="calculator__numpad"
         value="7"
         handleInput={handleValueInput}
-        className="numpad__value--7"
+        className="numpad__btn numpad__value--7"
       />
       <Button
         ariaDescribedBy="calculator__numpad"
         value="8"
         handleInput={handleValueInput}
-        className="numpad__value--8"
+        className="numpad__btn numpad__value--8"
       />
       <Button
         ariaDescribedBy="calculator__numpad"
         value="9"
         handleInput={handleValueInput}
-        className="numpad__value--9"
+        className="numpad__btn numpad__value--9"
       />
       <Button
         ariaLabel="multiply"
@@ -57,7 +57,7 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         value="*"
         entity="×"
         handleInput={handleOperatorInput}
-        className="numpad__operator--multiply"
+        className="numpad__btn numpad__operator--multiply numpad__btn--accent"
       />
 
       {/* row 3 */}
@@ -65,19 +65,19 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         ariaDescribedBy="calculator__numpad"
         value="4"
         handleInput={handleValueInput}
-        className="numpad__value--4"
+        className="numpad__btn numpad__value--4"
       />
       <Button
         ariaDescribedBy="calculator__numpad"
         value="5"
         handleInput={handleValueInput}
-        className="numpad__value--5"
+        className="numpad__btn numpad__value--5"
       />
       <Button
         ariaDescribedBy="calculator__numpad"
         value="6"
         handleInput={handleValueInput}
-        className="numpad__value--6"
+        className="numpad__btn numpad__value--6"
       />
       <Button
         ariaLabel="subtract"
@@ -85,7 +85,7 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         value="-"
         entity="−"
         handleInput={handleOperatorInput}
-        className="numpad__operator--subtract"
+        className="numpad__btn numpad__operator--subtract numpad__btn--accent"
       />
 
       {/* row 4 */}
@@ -93,19 +93,19 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         ariaDescribedBy="calculator__numpad"
         value="1"
         handleInput={handleValueInput}
-        className="numpad__value--1"
+        className="numpad__btn numpad__value--1"
       />
       <Button
         ariaDescribedBy="calculator__numpad"
         value="2"
         handleInput={handleValueInput}
-        className="numpad__value--2"
+        className="numpad__btn numpad__value--2"
       />
       <Button
         ariaDescribedBy="calculator__numpad"
         value="3"
         handleInput={handleValueInput}
-        className="numpad__value--3"
+        className="numpad__btn numpad__value--3"
       />
       <Button
         ariaLabel="add"
@@ -113,7 +113,7 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         value="+"
         entity="+"
         handleInput={handleOperatorInput}
-        className="numpad__operator--add"
+        className="numpad__btn numpad__operator--add numpad__btn--accent"
       />
 
       {/* row 5 */}
@@ -121,7 +121,7 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         ariaDescribedBy="calculator__numpad"
         value="0"
         handleInput={handleValueInput}
-        className="numpad__value--0"
+        className="numpad__btn numpad__value--0"
       />
 
       <Button
@@ -129,7 +129,7 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         ariaDescribedBy="calculator__numpad"
         value="."
         handleInput={handleValueInput}
-        className="numpad__value--period"
+        className="numpad__btn numpad__value--period"
       />
 
       <Button
@@ -138,7 +138,7 @@ const Numpad = ({ handleValueInput, handleOperatorInput }) => {
         value="="
         entity="="
         handleInput={handleOperatorInput}
-        className="numpad__operator--equals"
+        className="numpad__btn numpad__operator--equals numpad__btn--accent-2"
       />
     </div>
   );

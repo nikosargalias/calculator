@@ -4,11 +4,11 @@ import {
   isValidChar,
   isValidNumber,
   isValidOperator,
-} from "../functionality/validation";
+} from "../logic/validation";
 import {
   processNumberInput,
   processOperatorInput,
-} from "../functionality/calculator/calculator";
+} from "../logic/calculator-logic";
 import Numpad from "./Numpad";
 
 const appRoot = document.querySelector("#app");
@@ -41,7 +41,10 @@ class CalculatorApp extends React.Component {
   }
 
   handleOperatorInput(input) {
-    if (!isValidChar(input) || !isValidOperator(input)) return;
+    if (!isValidChar(input) || !isValidOperator(input)) {
+      // do something
+      return;
+    }
 
     this.setState(({ keystrokes, calculatedValue, lastKeystroke }) => {
       const newKeystrokes = processOperatorInput({
@@ -55,7 +58,10 @@ class CalculatorApp extends React.Component {
   }
 
   handleValueInput(input) {
-    if (!isValidChar(input) || !isValidNumber(input)) return;
+    if (!isValidChar(input) || !isValidNumber(input)) {
+      // do something
+      return;
+    }
 
     this.setState(({ keystrokes }) => {
       const newKeystrokes = processNumberInput({
@@ -81,7 +87,7 @@ class CalculatorApp extends React.Component {
     return (
       <div className="container">
         <div className="calculator">
-          <div className="calculator__result">
+          <div className="calculator__result result">
             <output>
               {this.state.keystrokes || this.state.calculatedValue || 0}
             </output>
