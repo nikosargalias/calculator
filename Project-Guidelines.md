@@ -1,4 +1,4 @@
-## import Note - Please Read
+## Important Note - Please Read
 
 A quick note before reading on: I'mn afraid due to some restrictions on my laptop I couldn't download Sketch to open the file that was sent. I also attempted to find an online Sketch file viewer but upon opening the sketch file, all the spacing from button to button was different and it seemed skewed. As a result the app was build by "eyeballing" the spacing and sizes of everything. In a normal work situation, I would always ensure the build is pixel perfect according to the design I am sent, and would ensure that I have access to the appropriate programms required to view the design with accurate pixel representation .
 
@@ -6,9 +6,9 @@ A quick note before reading on: I'mn afraid due to some restrictions on my lapto
 
 Please see below for an outline of each technology used in this project, and the reasoning behind each choice.
 
-### React Architecture - mixed with MVC
+### React Architecture
 
-- I chose to use React because I felt this project benefitted from the single flow of state, and component architecture. It made the creation of the different components simple with a clear seperation of view controller and logic.
+- I chose to use React because I felt this project benefitted from the single flow of state, and component architecture.
 
 The parent <CalculatorApp /> component is what holds the state of the calculator. However the functionality has been extracted to a separate file titled calculator-logic.js inside the /logic folder - the purpose of this is twofold:
 
@@ -21,10 +21,7 @@ I have implemented some tests which verify the calculator-logic functions run co
 
 ## Error handling
 
-You'll notice in the CalculatorApp.jsx file on the handleOperatorInput (line 43) and handleValueInput (line 60) methods I have a comment which states 'do something'. This is to point out that is invalid input is passed in, there should some some error handling code here. It may also be considered a hack attack assuming the program has no regular way to input invalid data. Again, due to the tim constraint of this project, I didn't spent time writing accurate error handling code, however a couple of options would have been:
-
-1. To simply return new Error()
-2. To block all user input on the page until a page reload (this would be applicable for more serious situations with sensitive data).
+You'll notice in the CalculatorApp.jsx file on the handleOperatorInput (line 43) and handleValueInput (line 60) methods I have a comment which states 'do something'. This is to point out that if invalid input is passed in, there should some some error handling code here. It may also be considered a hack attack. In this particular situation, it's not an issue, however in a real world aplication with backend implemented, a discussion for correct error handling would be ideal.
 
 ### Webpack and NPM
 
@@ -40,13 +37,13 @@ I'm using NPM, Webpack and Babel for multiple reasons listed below:
 ### Accessibility
 
 - Aria Attributes
-  Regarding accessibility, there is little to no information online about specifically making a calculator accessible. I did consider multiple options, from wrapping the numpad buttons in a list. however I decided to go with a div with a role="group", in addition to an aria-label="calculator numpad" and a aria-describedby attribute on the child buttons linked to the parent div. In addition, for the buttons which contain symbols as textContent. I used an aria label to explicitely state the correct word, rather than relying on the screen readder to read the symbol correctly.
+  Regarding accessibility, there is little to no information online about specifically making a calculator accessible. I did consider multiple options, such as wrapping the numpad buttons in a list. However I decided to go with a div with a role="group", in addition to an aria-label="calculator numpad" and a aria-describedby attribute on the child buttons linked to the parent div. In addition, for the buttons which contain symbols as textContent. I used an aria label to explicitely state the correct word, rather than relying on the screen readder to read the symbol correctly.
 
 - Tab Order
   In addition to the above, I ensure correct tab order by correct html placement of each button based on the calculator design that was provided.
 
 - Keyboard Accessibility
-  I added an event listener to the window, listening to keyboard pressed, and had some validation which checked the key that was pressed. if the key was a valid input, the handler functions were called correctly.
+  I added an event listener to the window, listening to keyboard inputs, and had some validation which checked the key that was pressed. if the key was a valid input, the handler functions were called.
 
 - role="live"
   I used the semantically correct <output> element for the calculator result panel so as to automatically read the inputs/result.
