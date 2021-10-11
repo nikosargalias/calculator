@@ -20,6 +20,7 @@ class CalculatorApp extends React.Component {
       keystrokes: "",
       calculatedValue: "",
       lastKeystroke: "",
+      history: [],
     };
   }
 
@@ -32,18 +33,23 @@ class CalculatorApp extends React.Component {
     window.removeEventListener("keydown", this.handleKeydown.bind(this));
   }
 
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+
   handleOperatorInput(input) {
     if (!isValidChar(input) || !isValidOperator(input)) {
-      // do some eroor handling
+      // do some error handling
       return;
     }
 
-    this.setState(({ keystrokes, calculatedValue, lastKeystroke }) => {
+    this.setState(({ keystrokes, calculatedValue, lastKeystroke, history }) => {
       const newKeystrokes = processOperatorInput({
         input,
         keystrokes,
         calculatedValue,
         lastKeystroke,
+        history,
       });
       return newKeystrokes;
     });
@@ -51,7 +57,7 @@ class CalculatorApp extends React.Component {
 
   handleValueInput(input) {
     if (!isValidChar(input) || !isValidNumber(input)) {
-      // do some eroor handling
+      // do some error handling
       return;
     }
 

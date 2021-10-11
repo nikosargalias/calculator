@@ -16,6 +16,7 @@ function processOperatorInput({
   keystrokes,
   lastKeystroke,
   calculatedValue,
+  history,
 }) {
   //   Do not allow operator to be first input unless number has been inputed or a calculation has already been made which can be added to.
   if (!calculatedValue && !keystrokes) {
@@ -58,6 +59,7 @@ function processOperatorInput({
         keystrokes: "",
         calculatedValue: result,
         lastKeystroke: input,
+        history: [...history, { keystrokes, result }],
       };
     }
 

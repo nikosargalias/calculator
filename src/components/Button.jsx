@@ -1,6 +1,6 @@
 import React from "react";
 
-const Buttom = ({
+const Button = ({
   value,
   handleInput,
   className,
@@ -24,4 +24,4 @@ const Buttom = ({
   );
 };
 
-export default Buttom;
+export default Button;
